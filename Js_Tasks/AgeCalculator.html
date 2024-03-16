@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        .container{
+            width: 400px;
+            margin: auto;
+            margin-top: 150px;
+            box-shadow: 0 0 10px 1px rgb(145, 144, 144);
+            text-align: center;
+            padding: 25px;
+        }
+        .outPutBox{
+            margin-top: 50px;
+        }
+        span{
+            background-color: black;
+            border-radius: 3px;
+            padding: 8px 16px;
+            color: white;
+            font-size: 18px;
+            margin-left: 10px;
+            margin-right: 3px;
+        }
+        input[type=date],input[type=button]{
+            height: 24px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="dateInputBox">
+            <input type="date" name="" id="dateInput">
+            <input type="button" value="Calculate" id="calculate">
+        </div>
+        <div class="outPutBox">
+            <span id="year">00</span>Year
+            <span id="month">00</span>Month
+            <span id="date">00</span>Days
+        </div>
+    </div>
+
+    <script>
+        const inputDate = document.getElementById('dateInput')
+        const calculate = document.getElementById('calculate')
+        const year = document.getElementById('year')
+        const month = document.getElementById('month')
+        const date = document.getElementById('date')
+
+        calculate.addEventListener('click',()=>{
+            let birthDate = new Date(inputDate.value)
+            let birthYear = birthDate.getFullYear()
+            let birthMonth = birthDate.getMonth()
+            let birthDay = birthDate.getDate()
+            let currentDate = new Date()
+            let currentYear = currentDate.getFullYear()
+            let currentMonth = currentDate.getMonth()
+            let currentDay = currentDate.getDate()
+            let y = 0, m = 0, d = 0
+            if(currentDay >= birthDay)
+            {
+                d = currentDay - birthDay
+            }
+            else{
+                d = currentDay+(30-birthDay)
+                birthMonth+=1
+            }
+            if(currentMonth>=birthMonth){
+                m = currentMonth-birthMonth
+            }
+            else{
+                m = (12-birthMonth)+currentMonth
+                currentYear-=1
+            }
+            y=currentYear-birthYear
+            year.innerText=y <10 ? `0${y}`:y
+            month.innerText=m <10 ? `0${m}`:m
+            date.innerText = d <10 ? `0${d}`:d
+
+            //  2024 - 03 - 23
+            //  2000 - 05 - 20
+            //----------------
+            //    23 - 04 - 03
+        })
+    </script>
+</body>
+</html>
